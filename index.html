@@ -23,6 +23,43 @@
                 <i class="fa-light fa-copy" width="23" height="23"></i>
             </button>
         </div>
+
+        <div class="input-container">
+            <!-- Password length section -->
+            <div class="length-container">
+                <p>Password Lenght</p>
+                <p data-lengthNumber>0</p>
+            </div>
+            <!-- Slider -->
+            <input type="range" min="1" max="20" class="slider" step="1" data-lengthSlider>
+
+            <!-- Checkboxes -->
+            <div>
+                <input type="checkbox" id="uppercase">
+                <label for="uppercase">Includes uppercase letters</label>
+            </div>
+            <div>
+                <input type="checkbox" id="lowercase">
+                <label for="lowercase">Includes Lowercase letters</label>
+            </div>
+            <div>
+                <input type="checkbox" id="numbers">
+                <label for="numbers">Includes Numbers </label>
+            </div>
+            <div>
+                <input type="checkbox" id="symbols">
+                <label for="symbols">Includes Symbols </label>
+            </div>
+        </div>
+
+        <!-- Strength section -->
+        <div class="strength-container">
+            <p>Strength</p>
+            <div class="data-indicator"></div>
+        </div>
+
+        <!-- Generate Password -->
+        <button class="generate-password">Generate Password</button>
     </div>
 </body>
 </html>
