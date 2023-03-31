@@ -101,3 +101,20 @@ copybtn.addEventListener('click',() =>{
     if(passwordDisplay.value)
     copyContent();
 })
+
+
+function handleCheckBoxChange(){
+    checkCount =0;
+    allCheckBox.forEach( (checkbox) => {
+        if(checkbox.checked)
+        checkCount++;
+    })
+    //special condition
+    if(passwordLength<checkCount){
+        passwordLength = checkCount;
+        hadleSlider();
+    }
+}
+allCheckBox.forEach ((checkbox) => {
+    checkbox.addEventListener('change',handleCheckBoxChange);
+})
