@@ -124,7 +124,9 @@ allCheckBox.forEach((checkbox) => {
 function shufflePassword(array){
     // Fisher Yates Method
     for(let i=array.length-1;i>0;i--){
+        // random j, find out using random function
         const j=Math.floor(Math.random()*(i+1));
+        // swaping
         const temp = array[i];
         array[i]=array[j];
         array[j]=temp;
