@@ -217,7 +217,7 @@ h1 {
     background-repeat: no-repeat;
 }
 
-.slider::-webkit-slider-thumb{
+.slider::-webkit-slider-thumb{  /* this work all browsers except firfox*/
     appearance: none;
     position: relative;
     z-index: 1;
@@ -230,6 +230,25 @@ h1 {
     box-shadow: 0px 0px 20px 0px rgba(255, 229, 61, 0.50);
     transition: all 100ms ease-in;
 }
+
+/* for firfox */
+.slider::-moz-range-thumb {
+    position: relative;
+    z-index: 1;
+    appearance: none;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background: var(--vb-yellow);
+    box-shadow: 0px 0px 20px 0px rgba(255, 229, 61, 0.50);
+    cursor: pointer;
+  }  
+  .slider::-moz-range-thumb:hover {
+    outline: 2px solid var(--vb-yellow);
+    background-color: var(--dk-violet);
+    box-shadow: 0px 0px 25px 5px rgba(255, 229, 61, 0.80);
+  }
+
 
 .slider:focus{
     outline: 3px solid var(--vb-yellow);
