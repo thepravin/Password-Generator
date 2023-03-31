@@ -96,3 +96,8 @@ inputSlider.addEventListener('input',(e) =>{
     passwordLength = e.target.value;
     hadleSlider();
 })
+
+copybtn.addEventListener('click',() =>{
+    if(passwordDisplay.value)
+    copyContent();
+})
