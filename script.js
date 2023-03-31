@@ -91,3 +91,8 @@ setTimeout( () => {
 } ,2000);
 
 }
+
+inputSlider.addEventListener('input',(e) =>{
+    passwordLength = e.target.value;
+    hadleSlider();
+})
