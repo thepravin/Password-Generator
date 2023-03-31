@@ -7,16 +7,17 @@ const uppercaseCheck = document.querySelector("#uppercase");
 const lowercaseCheck = document.querySelector("#lowercase");
 const numbersCheck = document.querySelector("#numbers");
 const symbolsCheck = document.querySelector("#symbols");
-const indicator = document.querySelector("[data-indicator]");
+const indicator = document.querySelector(".data-indicator");
 const generateBtn = document.querySelector(".generateButton");
-const allCheckBox = document.querySelector("input[type=checkbox]");
+const allCheckBox = document.querySelectorAll("input[type=checkbox");
 const symbols = '~`!@#$%^&*()_-+={[}];:"<,>.?/';
 
 let password = "";
 let passwordLength = 10;
-let checkCount = 1;
+let checkCount = 0;
 hadleSlider();
 // set strength circle color to gray
+setIndicator("#ccc");
 
 // set password length
 function hadleSlider() {
@@ -25,8 +26,9 @@ function hadleSlider() {
 }
 
 function setIndicator(color) {
-    indicator.getElementsByClassName.backgroundColor = color;
+    indicator.style.backgroundColor = color;
     // shadow
+    indicator.style.boxShadow = `0px 0px 12px 1px ${color}`;
 }
 
 function getRndInteger(min, max) {
@@ -38,10 +40,10 @@ function generateRndNumber() {
 }
 
 function generateLowerCase() {
-    return getRndInteger(97, 123); // ASCI values of lowercase
+    return String.fromCharCode(getRndInteger(97, 123)); // ASCI values of lowercase
 }
 function generateUpperCase() {
-    return getRndInteger(65, 91); // ASCI values of uppercase
+    return String.fromCharCode(getRndInteger(65, 91)); // ASCI values of uppercase
 }
 
 function generateSymbols() {
@@ -115,6 +117,88 @@ function handleCheckBoxChange(){
         hadleSlider();
     }
 }
-allCheckBox.forEach ((checkbox) => {
+allCheckBox.forEach((checkbox) => {
     checkbox.addEventListener('change',handleCheckBoxChange);
+})
+
+function shufflePassword(array){
+    // Fisher Yates Method
+    for(let i=array.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+        const temp = array[i];
+        array[i]=array[j];
+        array[j]=temp;
+    }
+    let str = "";
+    array.forEach((el)=>(str+=el));
+    return str;
+
+}
+
+generateBtn.addEventListener('click',() =>{
+    // none of the checkbox are selected
+    if(checkCount ==0)
+        return;
+
+    if(passwordLength < checkCount){
+        passwordLength = checkCount;
+        hadleSlider();
+    }
+
+    //let's start the journey to find new password
+    console.log("Starting the Journey");
+
+    // remove old password
+    password = " "
+
+    //let's put the stuff mentioned by checkboxes
+ /*    if(uppercaseCheck.checkbox){
+        password += generateUpperCase();
+    }
+    if(lowercaseCheck.checkbox){
+        password += generateLowerCase();
+    }
+    if(numbersCheck.checkbox){
+        password += generateRndNumber();
+    }
+    if(symbolsCheck.checkbox){
+        password += generateSymbols();
+    } */
+
+    let funCArr = [];
+    
+    if(uppercaseCheck.checked)
+        funCArr.push(generateUpperCase);
+    if(lowercaseCheck.checked)
+        funCArr.push(generateLowerCase);
+    if(numbersCheck.checked)
+        funCArr.push(generateRndNumber);
+    if(symbolsCheck.checked)
+        funCArr.push(generateSymbols);
+
+        // compulsory addition
+        for(let i=0;i<funCArr.length;i++){
+            password +=funCArr[i]();
+        }
+    console.log("Compulsory addition done");
+
+        // remaining addition
+        for (let i = 0; i < passwordLength-funCArr.length; i++) {
+           let randIndex = getRndInteger(0,funCArr.length);
+           password += funCArr[randIndex]();
+            
+        } 
+    console.log("remaining addition done");
+
+        // shuffle the password
+        password = shufflePassword(Array.from(password));
+        console.log("shuffling addition done");
+
+        // show in UI
+        passwordDisplay.value = password;
+    console.log("UI addition done");
+
+        // calculate strength
+        calcStrength();
+
 })
